@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Card } from "./components/Card";
 
 const App = () => {
   const [valor, setValor] = useState(0);
@@ -8,6 +9,7 @@ const App = () => {
   const [fullName, setFullName] = useState({name: "", lastName: ""});
   const [tasks, setTasks] = useState<{label: string, done: boolean}[]>([]);
   const [inputValue, setInputValue] = useState("");
+  const [visible, setVisible] = useState(false);
 
   const handleClick = () => {
     setValor(valor + 1);
@@ -68,6 +70,8 @@ const App = () => {
     setTasks(newTasks);
   }
 
+  const handleClickButton = () => setVisible(!visible);
+
   return (
     <div>
       <p>Você clicou {valor} vezes</p>
@@ -118,6 +122,10 @@ const App = () => {
         </ul>
       </div>
       
+      <div>
+        <button onClick={handleClickButton}>Mostrar/Ocultar</button>
+        {visible && <Card/>}
+      </div>
 
     </div>
   );

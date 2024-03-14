@@ -6,7 +6,7 @@ const App = () => {
   const [value, setValue] = useState("");
   const [count, setCount] = useState(0);
   const [fullName, setFullName] = useState({name: "", lastName: ""});
-  const [tasks, setTasks] = useState<string[]>([]);
+  const [tasks, setTasks] = useState<{label: string, done: boolean}[]>([]);
   const [inputValue, setInputValue] = useState("");
 
   const handleClick = () => {
@@ -44,16 +44,15 @@ const App = () => {
     if (inputValue == "")  return;
 
     //metodo 1
-    // setTasks([...tasks, inputValue]);
+    setTasks([...tasks, {label: inputValue, done: false}]);
 
     //metodo 2
     // setTasks(tasks.concat([inputValue]))
 
     //metodo 3
-    const newTasks = [...tasks];
-    newTasks.push(inputValue);
-
-    setTasks(newTasks);
+    // const newTasks = [...tasks];
+    // newTasks.push(inputValue);
+    // setTasks(newTasks);
 
     setInputValue("");
   }
@@ -61,6 +60,12 @@ const App = () => {
   const handleDele = (index: number) => {
     setTasks(tasks.filter((_, i) => i != index));
 
+  }
+
+  const handleToggleDone = (key: number) => {
+    const newTasks = [...tasks];
+    newTasks[key].done = !newTasks[key].done;
+    setTasks(newTasks);
   }
 
   return (
@@ -108,7 +113,7 @@ const App = () => {
         <button onClick={handleAddTask}>Adicionar</button>
         <ul>
           {tasks.map((value, key) => (
-            <li key={key}>{value} - <button onClick={() => handleDele(key)}>Excluir</button></li>
+            <li key={key}><input type="checkbox" checked={value.done} onChange={() => handleToggleDone(key)}/> {value.label} - <button onClick={() => handleDele(key)}>Excluir</button></li>
           ))}
         </ul>
       </div>

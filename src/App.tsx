@@ -5,6 +5,7 @@ const App = () => {
   const [logged, setLogged] = useState(false);
   const [value, setValue] = useState("");
   const [count, setCount] = useState(0);
+  const [fullName, setFullName] = useState({name: "", lastName: ""});
 
   const handleClick = () => {
     setValor(valor + 1);
@@ -27,6 +28,14 @@ const App = () => {
     // c != count
     setCount(c => c + 1); // 0 + 1 = 1
     alert(count);
+  }
+
+  const handleChangeFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFullName({...fullName, name: e.target.value});
+  }
+
+  const handleChangeLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFullName({...fullName, lastName: e.target.value});
   }
 
   return (
@@ -61,6 +70,12 @@ const App = () => {
         <h2>{count}</h2>
 
         <button onClick={handleClickCount2}>Adicionar</button>
+      </div>
+
+      <div>
+        <input type="text" value={fullName.name} onChange={handleChangeFirstName}/>
+        <input type="text" value={fullName.lastName} onChange={handleChangeLastName}/>
+        <p>{fullName.name} {fullName.lastName}</p>
       </div>
     </div>
   );

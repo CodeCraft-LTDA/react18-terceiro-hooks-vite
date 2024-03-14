@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card } from "./components/Card";
+import { Dialog } from "./components/Dialog";
 
 const App = () => {
   const [valor, setValor] = useState(0);
@@ -125,6 +126,10 @@ const App = () => {
       <div>
         <button onClick={handleClickButton}>Mostrar/Ocultar</button>
         {visible && <Card/>}
+      </div>
+
+      <div>
+        <Dialog />
       </div>
 
     </div>

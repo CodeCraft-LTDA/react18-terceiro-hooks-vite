@@ -6,6 +6,8 @@ const App = () => {
   const [value, setValue] = useState("");
   const [count, setCount] = useState(0);
   const [fullName, setFullName] = useState({name: "", lastName: ""});
+  const [tasks, setTasks] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState("");
 
   const handleClick = () => {
     setValor(valor + 1);
@@ -36,6 +38,24 @@ const App = () => {
 
   const handleChangeLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFullName({...fullName, lastName: e.target.value});
+  }
+
+  const handleAddTask = () => {
+    if (inputValue == "")  return;
+
+    //metodo 1
+    // setTasks([...tasks, inputValue]);
+
+    //metodo 2
+    // setTasks(tasks.concat([inputValue]))
+
+    //metodo 3
+    const newTasks = [...tasks];
+    newTasks.push(inputValue);
+
+    setTasks(newTasks);
+
+    setInputValue("");
   }
 
   return (
@@ -77,6 +97,18 @@ const App = () => {
         <input type="text" value={fullName.lastName} onChange={handleChangeLastName}/>
         <p>{fullName.name} {fullName.lastName}</p>
       </div>
+
+      <div>
+        <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
+        <button onClick={handleAddTask}>Adicionar</button>
+        <ul>
+          {tasks.map((value, key) => (
+            <li key={key}>{value}</li>
+          ))}
+        </ul>
+      </div>
+      
+
     </div>
   );
 }

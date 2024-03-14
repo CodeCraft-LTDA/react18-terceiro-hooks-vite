@@ -3,6 +3,7 @@ import { useState } from "react";
 const App = () => {
   const [valor, setValor] = useState(0);
   const [logged, setLogged] = useState(false);
+  const [value, setValue] = useState("");
 
   const handleClick = () => {
     setValor(valor + 1);
@@ -10,6 +11,10 @@ const App = () => {
 
   const handleClick2 = () => {
     setLogged(!logged);
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
   }
 
   return (
@@ -22,6 +27,11 @@ const App = () => {
         <button onClick={handleClick2}>
           {logged ? 'Logout' : 'Login'}
         </button>
+      </div>
+
+      <div>
+        <input type="text" value={value} onChange={handleChange}/>
+        <p>{value}</p>
       </div>
     </div>
   );

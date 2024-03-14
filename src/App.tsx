@@ -58,6 +58,11 @@ const App = () => {
     setInputValue("");
   }
 
+  const handleDele = (index: number) => {
+    setTasks(tasks.filter((_, i) => i != index));
+
+  }
+
   return (
     <div>
       <p>Você clicou {valor} vezes</p>
@@ -103,7 +108,7 @@ const App = () => {
         <button onClick={handleAddTask}>Adicionar</button>
         <ul>
           {tasks.map((value, key) => (
-            <li key={key}>{value}</li>
+            <li key={key}>{value} - <button onClick={() => handleDele(key)}>Excluir</button></li>
           ))}
         </ul>
       </div>

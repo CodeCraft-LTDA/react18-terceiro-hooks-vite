@@ -30,8 +30,12 @@ const App = () => {
       </div>
 
       <div>
-        <input type="text" value={value} onChange={handleChange}/>
-        <p>{value}</p>
+        {value == "" ? 
+        <>
+          <input type="text" value={value} onChange={handleChange}/>
+          <p>{value}</p>
+        </> : <p>Valor não pode ser vazio</p>
+        }
       </div>
     </div>
   );
